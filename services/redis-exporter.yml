@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-external-exporter
+  labels:
+    app: redis
+    k8s-app: redis-ext
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: "9121"
+spec:
+  ports:
+  - name: redis-ext
+    port: 9121
+    protocol: TCP
+    targetPort: 9121
+  selector:
+    app: redis-exporter
